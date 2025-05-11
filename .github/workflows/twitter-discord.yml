@@ -1,0 +1,35 @@
+name: Post Tweets to Discord
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"  # every 15 minutes
+  workflow_dispatch:
+
+jobs:
+  tweet-to-discord:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run script
+        env:
+          TWITTER_BEARER: ${{ secrets.TWITTER_BEARER }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: python main.py
+
+      - name: Commit updated last_seen.json
+        run: |
+          git config --global user.name "RSS Bot"
+          git config --global user.email "bot@github.com"
+          git add last_seen.json
+          git commit -m "Update last seen tweet" || echo "No changes"
+          git push
