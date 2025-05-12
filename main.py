@@ -8,7 +8,7 @@ from datetime import datetime
 
 BEARER_TOKEN = os.environ.get("TWITTER_BEARER")
 WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK")
-USERNAME = "MasatoTouma"
+USERNAME = "EPAKIM1"
 SOURCE = f"Twitter - @{USERNAME}"
 SAVE_FILE = "last_seen.json"
 
