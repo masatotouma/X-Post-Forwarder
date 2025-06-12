@@ -2,7 +2,7 @@ name: Post Tweets to Discord
 
 on:
   schedule:
-    - cron: "*/15 * * * *"  # every 15 minutes
+    - cron: "*/720 * * * *"  # every 12h
   workflow_dispatch:
 
 jobs:
